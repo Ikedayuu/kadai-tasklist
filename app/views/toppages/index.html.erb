@@ -1,0 +1,28 @@
+<% if logged_in? %>
+  <%# ログインしているとき %>
+  <table class="table">
+    <tr>
+      <th>ID</th>
+      <th>Content</th>
+      <th>Status</th>
+      <th>Operation</th>
+    </tr>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.id %></td>
+        <td><%= task.content %></td>
+        <td><%= task.status %></td>
+        <td><%= link_to "詳細", task %> <%= link_to "編集", edit_task_path(task) %></td>
+      </tr>
+    <% end %>
+  </table>
+  <p><%= link_to "新しいタスクの作成", new_task_path %></p>
+<% else %>
+  <%# ログインしていないとき %>
+  <div class="center jumbotron">
+    <div class="text-center">
+      <h1>Welcome to the tasklists</h1>
+      <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
+    </div>
+  </div>
+<% end %>
